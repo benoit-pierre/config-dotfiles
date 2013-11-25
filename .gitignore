@@ -1,4 +1,5 @@
 /.Xauthority
+/.cache/
 /.xsession-errors
 /.xsession-errors.old
 /.zshenv.zwc

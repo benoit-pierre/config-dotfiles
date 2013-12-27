@@ -1,5 +1,7 @@
 /.Xauthority
 /.cache/
+/.recently-used
+/.thumbnails/
 /.xsession-errors
 /.xsession-errors.old
 /.zshenv.zwc

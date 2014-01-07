@@ -18,3 +18,7 @@
 	path = .config/screen
 	url = ../config-screen.git
 	ignore = dirty
+[submodule "readline"]
+	path = .config/readline
+	url = ../config-readline.git
+	ignore = dirty

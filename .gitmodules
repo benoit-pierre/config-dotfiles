@@ -42,3 +42,7 @@
 	path = .config/awesome
 	url = ../config-awesome.git
 	ignore = dirty
+[submodule "vimperator"]
+	path = .vimperator
+	url = ../config-vimperator.git
+	ignore = dirty

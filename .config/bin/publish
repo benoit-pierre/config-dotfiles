@@ -1,0 +1,12 @@
+#! /bin/sh
+
+[ 'x-n' != "x$1" ]; opt_dryrun=$?
+
+cd "$(dirname "$(readlink -e "$0")")"/../.. &&
+if [ 1 -eq $opt_dryrun ]
+then
+  git submodule foreach git --no-pager log --oneline --reverse origin/master..
+else
+  git submodule foreach git push origin HEAD:master
+fi
+

@@ -1,0 +1,18 @@
+#! /bin/sh
+
+case "$1" in
+  git)
+    origin='git@github.com:benoit-pierre/config-dotfiles.git'
+    ;;
+  http|'')
+    origin='https://github.com/benoit-pierre/config-dotfiles.git'
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+cd "$(dirname "$(readlink -e "$0")")"/../.. &&
+git config --local remote.origin.url "$origin" &&
+git submodule update --init
+

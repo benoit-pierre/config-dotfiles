@@ -30,3 +30,7 @@
 	path = .config/git
 	url = ../config-git.git
 	ignore = dirty
+[submodule "x11"]
+	path = .config/x11
+	url = ../config-x11.git
+	ignore = dirty

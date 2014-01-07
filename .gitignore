@@ -1,2 +1,5 @@
+/.Xauthority
+/.xsession-errors
+/.xsession-errors.old
 /.zshenv.zwc
 /[^.]*

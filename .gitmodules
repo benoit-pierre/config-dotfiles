@@ -58,3 +58,7 @@
 	path = .ncmpcpp
 	url = ../config-ncmpcpp.git
 	ignore = dirty
+[submodule "mplayer"]
+	path = .mplayer
+	url = ../config-mplayer.git
+	ignore = dirty

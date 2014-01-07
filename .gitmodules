@@ -46,3 +46,7 @@
 	path = .vimperator
 	url = ../config-vimperator.git
 	ignore = dirty
+[submodule "pulseaudio"]
+	path = .config/pulse
+	url = ../config-pulseaudio.git
+	ignore = dirty

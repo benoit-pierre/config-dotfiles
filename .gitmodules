@@ -6,3 +6,7 @@
 	path = .progs
 	url = ../config-progs.git
 	ignore = dirty
+[submodule "vim"]
+	path = .config/vim
+	url = ../config-vim.git
+	ignore = dirty

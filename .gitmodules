@@ -54,3 +54,7 @@
 	path = .config/mpd
 	url = ../config-mpd.git
 	ignore = dirty
+[submodule "ncmpcpp"]
+	path = .ncmpcpp
+	url = ../config-ncmpcpp.git
+	ignore = dirty

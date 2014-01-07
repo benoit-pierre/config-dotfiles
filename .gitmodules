@@ -34,3 +34,7 @@
 	path = .config/x11
 	url = ../config-x11.git
 	ignore = dirty
+[submodule "gtk"]
+	path = .config/gtk
+	url = ../config-gtk.git
+	ignore = dirty

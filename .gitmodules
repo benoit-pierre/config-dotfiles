@@ -26,3 +26,7 @@
 	path = .config/ranger
 	url = ../config-ranger.git
 	ignore = dirty
+[submodule "git"]
+	path = .config/git
+	url = ../config-git.git
+	ignore = dirty

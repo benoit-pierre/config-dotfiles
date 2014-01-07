@@ -14,3 +14,7 @@
 	path = .config/tmux
 	url = ../config-tmux.git
 	ignore = dirty
+[submodule "screen"]
+	path = .config/screen
+	url = ../config-screen.git
+	ignore = dirty

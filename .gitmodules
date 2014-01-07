@@ -10,3 +10,7 @@
 	path = .config/vim
 	url = ../config-vim.git
 	ignore = dirty
+[submodule "tmux"]
+	path = .config/tmux
+	url = ../config-tmux.git
+	ignore = dirty

@@ -38,3 +38,7 @@
 	path = .config/gtk
 	url = ../config-gtk.git
 	ignore = dirty
+[submodule "awesome"]
+	path = .config/awesome
+	url = ../config-awesome.git
+	ignore = dirty

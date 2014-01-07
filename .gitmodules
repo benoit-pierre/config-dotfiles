@@ -1,0 +1,4 @@
+[submodule "zsh"]
+	path = .config/zsh
+	url = ../config-zsh.git
+	ignore = dirty

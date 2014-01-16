@@ -1,0 +1,14 @@
+#! /bin/sh
+
+[ 'x-n' != "x$1" ]; opt_dryrun=$?
+
+cd "$(dirname "$(readlink -e "$0")")"/../.. &&
+git --no-pager submodule --quiet foreach echo '"name=$name path=$path"' |
+while read line
+do
+  eval "$line" &&
+  git --no-pager status --short "$path" &&
+  git --no-pager diff --submodule=log "$path"
+done &&
+git --no-pager status --short --untracked-files=no --ignore-submodules=all
+

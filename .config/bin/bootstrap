@@ -1,5 +1,13 @@
 #! /bin/sh
 
+run()
+{
+  "$@" && return 0
+  code=$?
+  echo 2>&1 "command \`$@' failed with exit status $code"
+  exit $code
+}
+
 case "$1" in
   git)
     origin='git@github.com:benoit-pierre/config-dotfiles.git'
@@ -12,7 +20,179 @@ case "$1" in
     ;;
 esac
 
-cd "$(dirname "$(readlink -e "$0")")"/../.. &&
-git config --local remote.origin.url "$origin" &&
-git submodule update --init
+run cd "$(dirname "$(readlink -e "$0")")"/../..
+
+echo "Setting remote origin to $origin."
+run git config --local remote.origin.url "$origin"
+
+run git config --file=.gitmodules --list | sed -n 's/^submodule\.\([^".]\+\)\.path=\([^"]\+\)$/name="\1" path="\2"/p' |
+while read line
+do
+  run eval "$line"
+  if [ ! -r "$path/.git" ]
+  then
+    echo "Initialising module $name in $path."
+    run git submodule update --init "$path"
+  fi
+done
+
+echo "Installing packages."
+case "`lsb_release -i -s | tr A-Z a-z`" in
+  arch)
+    packages=''
+    for pkg in \
+      atool \
+      awesome \
+      bdf-unifont \
+      calc \
+      ccache \
+      cscope \
+      ctags \
+      diffstat \
+      diffutils \
+      distcc \
+      fdupes \
+      feh \
+      geeqie \
+      git \
+      gnupg \
+      gvim \
+      hardlink \
+      hddtemp \
+      hdparm \
+      htop \
+      iotop \
+      keepassx \
+      keychain \
+      lftp \
+      libnotify \
+      ltrace \
+      mpd \
+      mplayer \
+      ncmpcpp \
+      numlockx \
+      parcellite \
+      parcellite \
+      patch \
+      patchutils \
+      pavucontrol \
+      perl-term-readkey \
+      powertop \
+      procps-ng \
+      psmisc \
+      ranger \
+      ruby \
+      s-nail \
+      screen \
+      smartmontools \
+      sshfs \
+      strace \
+      subdownloader \
+      tmux \
+      valgrind \
+      w3m \
+      wget \
+      x11-ssh-askpass \
+      x11vnc \
+      xdg-user-dirs \
+      xdg-utils \
+      xdotool \
+      xorg-server-xephyr \
+      xorg-xauth \
+      xsel \
+      xterm \
+      zsh \
+      ;
+    do
+      pacman --query "$pkg" &>/dev/null || packages="$packages${packages:+ }$pkg"
+    done
+    if [ -n "$packages" ]
+    then
+      run sudo pacman --sync $packages
+    fi
+    if which packer-color &>/dev/null
+    then
+      for pkg in \
+        cgdb \
+        kdiff3-qt \
+        xkbset \
+        ssvnc \
+        ;
+      do
+        pacman --query "$pkg" &>/dev/null || run sudo packer-color "$pkg"
+      done
+    fi
+    ;;
+  linuxmint|ubuntu)
+    run sudo apt-get --verbose-versions install \
+      apcalc \
+      atool \
+      awesome \
+      ccache \
+      cgdb \
+      console-data \
+      cscope \
+      diffstat \
+      diffutils \
+      distcc \
+      exuberant-ctags \
+      fdupes \
+      feh \
+      geeqie \
+      git \
+      gnupg-agent \
+      hardlink \
+      hddtemp \
+      hdparm \
+      heirloom-mailx \
+      htop \
+      iotop \
+      kdiff3-qt \
+      keepassx \
+      keychain \
+      lftp \
+      libnotify-bin \
+      libterm-readkey-perl \
+      ltrace \
+      mpd \
+      mplayer \
+      ncmpcpp \
+      ncurses-term \
+      numlockx \
+      parcellite \
+      parcellite \
+      patch \
+      patchutils \
+      pavucontrol \
+      powertop \
+      procps \
+      psmisc \
+      ranger \
+      ruby \
+      screen \
+      smartmontools \
+      ssh-askpass \
+      sshfs \
+      ssvnc \
+      strace \
+      subdownloader \
+      tmux \
+      unifont \
+      valgrind \
+      vim-gtk \
+      w3m \
+      wget \
+      x11vnc \
+      xauth \
+      xdg-user-dirs \
+      xdg-utils \
+      xdotool \
+      xkbset \
+      xsel \
+      xserver-xephyr \
+      xterm \
+      zsh \
+      ;
+    ;;
+esac
 

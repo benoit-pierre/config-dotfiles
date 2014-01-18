@@ -1,14 +1,23 @@
 #! /bin/sh
 
-[ 'x-n' != "x$1" ]; opt_dryrun=$?
+run()
+{
+  "$@" && return 0
+  code=$?
+  echo 2>&1 "command \`$@' failed with exit status $code"
+  exit $code
+}
 
-cd "$(dirname "$(readlink -e "$0")")"/../.. &&
-git --no-pager submodule --quiet foreach echo '"name=$name path=$path"' |
+run cd "$(dirname "$(readlink -e "$0")")"/../..
+run git config --file=.gitmodules --list | sed -n 's/^submodule\.\([^".]\+\)\.path=\([^"]\+\)$/name="\1" path="\2"/p' |
 while read line
 do
-  eval "$line" &&
-  git --no-pager status --short "$path" &&
-  git --no-pager diff --submodule=log "$path"
-done &&
-git --no-pager status --short --untracked-files=no --ignore-submodules=all
+  run eval "$line"
+  run git --no-pager status --short "$path"
+  if [ -r "$path" ]
+  then
+    run git --no-pager diff --submodule=log "$path"
+  fi
+done
+run git --no-pager status --short --untracked-files=no --ignore-submodules=all
 

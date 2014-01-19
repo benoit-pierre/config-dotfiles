@@ -19,5 +19,5 @@ do
     run git --no-pager diff --submodule=log "$path"
   fi
 done
-run git --no-pager status --short --untracked-files=no --ignore-submodules=all
+run git --no-pager status --short --branch --untracked-files=no --ignore-submodules=all
 

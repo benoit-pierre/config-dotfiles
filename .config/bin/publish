@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 [ 'x-n' != "x$1" ]; opt_dryrun=$?
 

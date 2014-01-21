@@ -8,6 +8,16 @@ run()
   exit $code
 }
 
+tic()
+{
+  for info in "$@"
+  do
+    run sudo tic "$info"
+  done
+
+  run sudo chmod og+rX /usr/share/terminfo
+}
+
 case "$1" in
   git)
     origin='git@github.com:benoit-pierre/config-dotfiles.git'
@@ -195,4 +205,10 @@ case "`lsb_release -i -s | tr A-Z a-z`" in
       ;
     ;;
 esac
+
+echo "Installing terminfo entries for screen and tmux"
+tic .config/screen/xterm-scr-256color .config/tmux/xterm-tmux-256color
+
+echo "Installing xsession.desktop"
+run sudo install -m644 .config/x11/xsession.desktop /usr/share/xsessions/xsession.desktop
 

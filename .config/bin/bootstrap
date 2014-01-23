@@ -242,5 +242,5 @@ msg "Installing terminfo entries for screen and tmux"
 tic .config/screen/xterm-scr-256color .config/tmux/xterm-tmux-256color
 
 msg "Installing xsession.desktop"
-run sudo install -m644 .config/x11/xsession.desktop /usr/share/xsessions/xsession.desktop
+run sudo install -m644 .config/x11/xsession-"$dist".desktop /usr/share/xsessions/xsession.desktop
 

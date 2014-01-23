@@ -16,7 +16,7 @@ publish_submodule()
 }
 
 cfgbindir="$(dirname "$(readlink -e "$0")")" &&
-source "$cfgbindir/utils.sh" ||
+. "$cfgbindir/utils.sh" ||
 exit $?
 
 chdir_top

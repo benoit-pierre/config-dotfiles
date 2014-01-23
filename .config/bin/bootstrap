@@ -1,22 +1,57 @@
 #!/bin/sh
 
+msg()
+{
+  echo "$@"
+}
+
+err()
+{
+  echo 1>&2 "$@"
+}
+
 run()
 {
   "$@" && return 0
   code=$?
-  echo 2>&1 "command \`$@' failed with exit status $code"
+  err "command \`$@' failed with exit status $code"
   exit $code
 }
 
 tic()
 {
+  case "$dist" in
+    arch)
+      infodir="/usr/share/terminfo"
+      ;;
+    ubuntu)
+      infodir="/etc/terminfo"
+      ;;
+  esac
+
   for info in "$@"
   do
-    run sudo tic "$info"
+    run sudo tic -o "$infodir" "$info"
   done
 
-  run sudo chmod og+rX /usr/share/terminfo
+  run sudo chmod og+rX -R "$infodir"
 }
+
+run cd "$(dirname "$(readlink -e "$0")")"/../..
+
+dist="`lsb_release -i -s | tr A-Z a-z`"
+case "$dist" in
+  arch)
+    dist='arch'
+    ;;
+  linuxmint|ubuntu)
+    dist='ubuntu'
+    ;;
+  *)
+    err "unsuported distribution: $dist"
+    exit 1
+    ;;
+esac
 
 case "$1" in
   git)
@@ -29,10 +64,7 @@ case "$1" in
     exit 1
     ;;
 esac
-
-run cd "$(dirname "$(readlink -e "$0")")"/../..
-
-echo "Setting remote origin to $origin."
+msg "Setting remote origin to $origin."
 run git config --local remote.origin.url "$origin"
 
 run git config --file=.gitmodules --list | sed -n 's/^submodule\.\([^".]\+\)\.path=\([^"]\+\)$/name="\1" path="\2"/p' |
@@ -41,13 +73,13 @@ do
   run eval "$line"
   if [ ! -r "$path/.git" ]
   then
-    echo "Initialising module $name in $path."
+    msg "Initialising module $name in $path."
     run git submodule update --init "$path"
   fi
 done
 
-echo "Installing packages."
-case "`lsb_release -i -s | tr A-Z a-z`" in
+msg "Installing packages."
+case "$dist" in
   arch)
     packages=''
     for pkg in \
@@ -133,7 +165,7 @@ case "`lsb_release -i -s | tr A-Z a-z`" in
       done
     fi
     ;;
-  linuxmint|ubuntu)
+  ubuntu)
     run sudo apt-get --verbose-versions install \
       apcalc \
       atool \
@@ -206,9 +238,9 @@ case "`lsb_release -i -s | tr A-Z a-z`" in
     ;;
 esac
 
-echo "Installing terminfo entries for screen and tmux"
+msg "Installing terminfo entries for screen and tmux"
 tic .config/screen/xterm-scr-256color .config/tmux/xterm-tmux-256color
 
-echo "Installing xsession.desktop"
+msg "Installing xsession.desktop"
 run sudo install -m644 .config/x11/xsession.desktop /usr/share/xsessions/xsession.desktop
 

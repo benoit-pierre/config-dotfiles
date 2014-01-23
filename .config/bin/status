@@ -1,23 +1,21 @@
 #!/bin/sh
 
-run()
+show_submodule_status()
 {
-  "$@" && return 0
-  code=$?
-  echo 2>&1 "command \`$@' failed with exit status $code"
-  exit $code
+  run git --no-pager status --short "$sub_path"
+  if [ -d "$sub_path" ]
+  then
+    run git --no-pager diff --submodule=log "$sub_path"
+  fi
 }
 
-run cd "$(dirname "$(readlink -e "$0")")"/../..
-run git config --file=.gitmodules --list | sed -n 's/^submodule\.\([^".]\+\)\.path=\([^"]\+\)$/name="\1" path="\2"/p' |
-while read line
-do
-  run eval "$line"
-  run git --no-pager status --short "$path"
-  if [ -r "$path" ]
-  then
-    run git --no-pager diff --submodule=log "$path"
-  fi
-done
+cfgbindir="$(dirname "$(readlink -e "$0")")" &&
+source "$cfgbindir/utils.sh" ||
+exit $?
+
+chdir_top
+
+foreach_submodule show_submodule_status
+
 run git --no-pager status --short --branch --untracked-files=no --ignore-submodules=all
 

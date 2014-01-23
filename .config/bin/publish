@@ -1,12 +1,34 @@
 #!/bin/sh
 
+show_submodule_outgoing()
+{
+  msg "Entering: '$sub_path'"
+  run git_submodule --no-pager log --oneline --reverse origin/master..HEAD
+}
+
+publish_submodule()
+{
+  msg "Entering: '$sub_path'"
+  if [ 0 -ne "`run git_submodule rev-list --count 'origin/master..HEAD'`" ]
+  then
+    run git_submodule push origin HEAD:master
+  fi
+}
+
+cfgbindir="$(dirname "$(readlink -e "$0")")" &&
+source "$cfgbindir/utils.sh" ||
+exit $?
+
+chdir_top
+
 [ 'x-n' != "x$1" ]; opt_dryrun=$?
 
-cd "$(dirname "$(readlink -e "$0")")"/../.. &&
 if [ 1 -eq $opt_dryrun ]
 then
-  git submodule foreach git --no-pager log --oneline --reverse origin/master..
+  fn='show_submodule_outgoing'
 else
-  git submodule foreach git push origin HEAD:master
+  fn='publish_submodule'
 fi
+
+foreach_submodule if_submodule_valid "$fn"
 

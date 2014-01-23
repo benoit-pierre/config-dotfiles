@@ -1,21 +1,12 @@
 #!/bin/sh
 
-msg()
+init_submodule()
 {
-  echo "$@"
-}
-
-err()
-{
-  echo 1>&2 "$@"
-}
-
-run()
-{
-  "$@" && return 0
-  code=$?
-  err "command \`$@' failed with exit status $code"
-  exit $code
+  if [ ! -r "$sub_path/.git" ]
+  then
+    msg "Initialising module $sub_name in $sub_path."
+    run git submodule update --init "$sub_path"
+  fi
 }
 
 tic()
@@ -37,21 +28,12 @@ tic()
   run sudo chmod og+rX -R "$infodir"
 }
 
-run cd "$(dirname "$(readlink -e "$0")")"/../..
+cfgbindir="$(dirname "$(readlink -e "$0")")" &&
+source "$cfgbindir/utils.sh" ||
+exit $?
 
-dist="`lsb_release -i -s | tr A-Z a-z`"
-case "$dist" in
-  arch)
-    dist='arch'
-    ;;
-  linuxmint|ubuntu)
-    dist='ubuntu'
-    ;;
-  *)
-    err "unsuported distribution: $dist"
-    exit 1
-    ;;
-esac
+chdir_top
+check_dist
 
 case "$1" in
   git)
@@ -67,16 +49,8 @@ esac
 msg "Setting remote origin to $origin."
 run git config --local remote.origin.url "$origin"
 
-run git config --file=.gitmodules --list | sed -n 's/^submodule\.\([^".]\+\)\.path=\([^"]\+\)$/name="\1" path="\2"/p' |
-while read line
-do
-  run eval "$line"
-  if [ ! -r "$path/.git" ]
-  then
-    msg "Initialising module $name in $path."
-    run git submodule update --init "$path"
-  fi
-done
+msg "Initializing submodules."
+foreach_submodule init_submodule
 
 msg "Installing packages."
 case "$dist" in

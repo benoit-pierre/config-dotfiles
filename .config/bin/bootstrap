@@ -148,6 +148,7 @@ case "$dist" in
       cgdb \
       console-data \
       cscope \
+      debian-goodies \
       diffstat \
       diffutils \
       distcc \

@@ -142,7 +142,6 @@ case "$dist" in
     run sudo apt-get --verbose-versions install \
       apcalc \
       atool \
-      awesome \
       ccache \
       cgdb \
       console-data \
@@ -153,32 +152,22 @@ case "$dist" in
       distcc \
       exuberant-ctags \
       fdupes \
-      feh \
-      geeqie \
       git \
-      gnupg-agent \
       hardlink \
       hddtemp \
       hdparm \
       heirloom-mailx \
       htop \
       iotop \
-      kdiff3-qt \
-      keepassx \
       keychain \
       lftp \
-      libnotify-bin \
       libterm-readkey-perl \
       ltrace \
       mpd \
-      mplayer \
       ncmpcpp \
       ncurses-term \
-      numlockx \
-      parcellite \
       patch \
       patchutils \
-      pavucontrol \
       powertop \
       procps \
       psmisc \
@@ -186,28 +175,45 @@ case "$dist" in
       ruby \
       screen \
       smartmontools \
-      ssh-askpass \
       sshfs \
-      ssvnc \
       strace \
-      subdownloader \
       tmux \
-      unifont \
       valgrind \
-      vim-gtk \
+      vim-nox \
       w3m \
       wget \
-      x11vnc \
-      xauth \
       xdg-user-dirs \
-      xdg-utils \
-      xdotool \
-      xkbset \
-      xsel \
-      xserver-xephyr \
-      xterm \
       zsh \
       ;
+    if [ -n "$DISPLAY" ]
+    then
+      run sudo apt-get --verbose-versions install \
+        awesome \
+        feh \
+        geeqie \
+        gnupg-agent \
+        kdiff3-qt \
+        keepassx \
+        libnotify-bin \
+        mplayer \
+        numlockx \
+        parcellite \
+        pavucontrol \
+        ssh-askpass \
+        ssvnc \
+        subdownloader \
+        unifont \
+        vim-gtk \
+        x11vnc \
+        xauth \
+        xdg-utils \
+        xdotool \
+        xkbset \
+        xsel \
+        xserver-xephyr \
+        xterm \
+        ;
+    fi
     ;;
 esac
 

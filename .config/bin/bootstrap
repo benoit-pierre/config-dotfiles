@@ -88,7 +88,6 @@ case "$dist" in
       ncmpcpp \
       numlockx \
       parcellite \
-      parcellite \
       patch \
       patchutils \
       pavucontrol \
@@ -176,7 +175,6 @@ case "$dist" in
       ncmpcpp \
       ncurses-term \
       numlockx \
-      parcellite \
       parcellite \
       patch \
       patchutils \

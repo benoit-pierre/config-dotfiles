@@ -141,6 +141,7 @@ case "$dist" in
   ubuntu)
     run sudo apt-get --verbose-versions install \
       apcalc \
+      apt-file \
       atool \
       ccache \
       cgdb \

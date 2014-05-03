@@ -25,8 +25,10 @@ chdir_top
 
 if [ 1 -eq $opt_dryrun ]
 then
+  git log --oneline --reverse '@{u}..'
   fn='show_submodule_outgoing'
 else
+  git push
   fn='publish_submodule'
 fi
 

@@ -67,6 +67,7 @@ case "$dist" in
       diffstat \
       diffutils \
       distcc \
+      expac \
       fdupes \
       feh \
       geeqie \

@@ -225,3 +225,18 @@ tic .config/screen/xterm-scr-256color .config/tmux/xterm-tmux-256color
 msg "Installing xsession.desktop"
 run sudo install -m644 .config/x11/xsession-"$dist".desktop /usr/share/xsessions/xsession.desktop
 
+msg "Installing console and X11 keymaps"
+run sudo install -m644 .config/x11/xkb/symbols/bpierre /usr/share/X11/xkb/symbols/bpierre
+case "$dist" in
+  arch)
+    base_keymaps_dir='/usr/share/kbd/keymaps/'
+    ;;
+  ubuntu)
+    base_keymaps_dir='/usr/share/keymaps/'
+    ;;
+esac
+keymap_dir="$base_keymaps_dir/i386/bpierre"
+run sudo install -m644 -D .config/console/bpierre.map "$keymap_dir/bpierre.map"
+run sudo gzip -f "$keymap_dir/bpierre.map"
+msg "Use \`localectl set-keymap --no-convert bpierre\` to change console and X11 keymaps."
+

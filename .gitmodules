@@ -66,3 +66,7 @@
 	path = .mpv
 	url = ../config-mpv.git
 	ignore = dirty
+[submodule "console"]
+	path = .config/console
+	url = ../config-console.git
+	ignore = dirty

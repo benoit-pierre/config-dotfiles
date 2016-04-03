@@ -105,7 +105,7 @@ case "$dist" in
       strace \
       subdownloader \
       tmux \
-      valgrind \
+      valgrind-multilib \
       w3m \
       wget \
       x11-ssh-askpass \

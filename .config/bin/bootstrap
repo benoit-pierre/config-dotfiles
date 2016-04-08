@@ -227,6 +227,21 @@ run sudo install -m644 .config/x11/xsession-"$dist".desktop /usr/share/xsessions
 
 msg "Installing console and X11 keymaps"
 run sudo install -m644 .config/x11/xkb/symbols/bpierre /usr/share/X11/xkb/symbols/bpierre
+run sudo sed -i '/bpierre/d;/^! layout$/{a\
+  bpierre         English (BPierre)
+}' /usr/share/X11/xkb/rules/evdev.lst
+run sudo sed -i '/<layout>/{:_loop;N;/<\/layout>/!b_loop;/<name>bpierre<\/name>/d;};/<layoutList>/{a\
+    <layout>\
+      <configItem>\
+        <name>bpierre</name>\
+        <shortDescription>bp</shortDescription>\
+        <description>English (BPierre)</description>\
+          <languageList>\
+            <iso639Id>eng</iso639Id>\
+          </languageList>\
+      </configItem>\
+    </layout>
+}' /usr/share/X11/xkb/rules/evdev.xml
 case "$dist" in
   arch)
     base_keymaps_dir='/usr/share/kbd/keymaps/'

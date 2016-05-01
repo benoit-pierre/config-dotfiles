@@ -154,6 +154,7 @@ case "$dist" in
       distcc \
       exuberant-ctags \
       fdupes \
+      gdebi-core \
       git \
       hardlink \
       hddtemp \

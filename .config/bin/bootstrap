@@ -156,6 +156,8 @@ case "$dist" in
       fdupes \
       gdebi-core \
       git \
+      gnupg2 \
+      gnupg-agent \
       hardlink \
       hddtemp \
       hdparm \
@@ -171,6 +173,7 @@ case "$dist" in
       ncurses-term \
       patch \
       patchutils \
+      pinentry-curses \
       powertop \
       procps \
       psmisc \
@@ -194,7 +197,6 @@ case "$dist" in
         awesome \
         feh \
         geeqie \
-        gnupg-agent \
         kdiff3-qt \
         keepassx \
         libnotify-bin \
@@ -202,6 +204,7 @@ case "$dist" in
         numlockx \
         parcellite \
         pavucontrol \
+        pinentry-gtk2 \
         ssh-askpass \
         ssvnc \
         subdownloader \

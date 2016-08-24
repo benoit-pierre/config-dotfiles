@@ -82,12 +82,15 @@ case "$dist" in
       keepassx2 \
       keychain \
       lftp \
+      lhasa \
       libnotify \
+      libunrar \
       ltrace \
       mpd \
       mplayer \
       ncmpcpp \
       numlockx \
+      p7zip \
       parcellite \
       patch \
       patchutils \
@@ -105,6 +108,8 @@ case "$dist" in
       strace \
       subdownloader \
       tmux \
+      unrar \
+      unzip \
       valgrind-multilib \
       w3m \
       wget \

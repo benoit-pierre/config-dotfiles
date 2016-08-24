@@ -115,6 +115,9 @@ case "$dist" in
       xdotool \
       xorg-server-xephyr \
       xorg-xauth \
+      xorg-xev \
+      xorg-xprop \
+      xorg-xwininfo \
       xsel \
       xterm \
       zsh \

@@ -79,7 +79,7 @@ case "$dist" in
       hdparm \
       htop \
       iotop \
-      keepassx \
+      keepassx2 \
       keychain \
       lftp \
       libnotify \

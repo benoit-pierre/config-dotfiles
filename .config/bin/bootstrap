@@ -103,6 +103,7 @@ case "$dist" in
       ruby \
       s-nail \
       screen \
+      scrot \
       smartmontools \
       sshfs \
       strace \

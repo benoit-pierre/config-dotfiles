@@ -72,6 +72,7 @@ case "$dist" in
       feh \
       geeqie \
       git \
+      glances \
       gnupg \
       gvim \
       hardlink \
@@ -165,6 +166,7 @@ case "$dist" in
       fdupes \
       gdebi-core \
       git \
+      glances \
       gnupg2 \
       gnupg-agent \
       hardlink \

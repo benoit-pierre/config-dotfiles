@@ -30,7 +30,8 @@ check_dist()
       ;;
     *)
       err "unsuported distribution: $dist"
-      exit 1
+      dist=''
+      return 1
       ;;
   esac
 }

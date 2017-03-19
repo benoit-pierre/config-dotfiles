@@ -136,7 +136,7 @@ case "$dist" in
     then
       run sudo pacman --sync $packages
     fi
-    if which packer-color &>/dev/null
+    if which yaourt &>/dev/null
     then
       for pkg in \
         cgdb \
@@ -145,7 +145,7 @@ case "$dist" in
         ssvnc \
         ;
       do
-        pacman --query "$pkg" &>/dev/null || run sudo packer-color "$pkg"
+        pacman --query "$pkg" &>/dev/null || run sudo yaourt "$pkg"
       done
     fi
     ;;

@@ -20,7 +20,7 @@ run()
 
 check_dist()
 {
-  dist="`lsb_release -i -s | tr A-Z a-z`"
+  dist="$(sed -n 's/^ID=//p' /etc/os-release)"
   case "$dist" in
     arch)
       dist='arch'

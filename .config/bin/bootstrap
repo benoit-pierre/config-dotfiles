@@ -134,7 +134,7 @@ case "$dist" in
     done
     if [ -n "$packages" ]
     then
-      run sudo pacman --sync $packages
+      run sudo pacman --sync --needed $packages
     fi
     if which yaourt &>/dev/null
     then

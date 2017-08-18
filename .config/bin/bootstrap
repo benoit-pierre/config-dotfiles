@@ -145,7 +145,7 @@ case "$dist" in
         ssvnc \
         ;
       do
-        pacman --query "$pkg" &>/dev/null || run sudo yaourt "$pkg"
+        pacman --query "$pkg" &>/dev/null || run yaourt "$pkg"
       done
     fi
     ;;

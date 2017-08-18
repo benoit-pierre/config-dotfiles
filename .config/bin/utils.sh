@@ -22,7 +22,7 @@ check_dist()
 {
   dist="$(sed -n 's/^ID=//p' /etc/os-release)"
   case "$dist" in
-    arch)
+    arch|manjaro)
       dist='arch'
       ;;
     linuxmint|ubuntu)

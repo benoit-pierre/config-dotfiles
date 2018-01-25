@@ -63,7 +63,7 @@
 	url = ../config-mplayer.git
 	ignore = dirty
 [submodule "mpv"]
-	path = .mpv
+	path = .config/mpv
 	url = ../config-mpv.git
 	ignore = dirty
 [submodule "console"]

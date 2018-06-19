@@ -171,8 +171,8 @@ case "$dist" in
       gdebi-core \
       git \
       glances \
-      gnupg2 \
       gnupg-agent \
+      gnupg2 \
       hardlink \
       hddtemp \
       hdparm \
@@ -192,6 +192,7 @@ case "$dist" in
       powertop \
       procps \
       psmisc \
+      qt5-styleplugins \
       ranger \
       ruby \
       screen \

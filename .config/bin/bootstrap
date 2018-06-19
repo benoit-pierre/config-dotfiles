@@ -80,7 +80,7 @@ case "$dist" in
       hdparm \
       htop \
       iotop \
-      keepassx2 \
+      keepassxc \
       keychain \
       lftp \
       lhasa \
@@ -92,14 +92,17 @@ case "$dist" in
       ncmpcpp \
       numlockx \
       p7zip \
+      pacman-contrib \
       parcellite \
       patch \
       patchutils \
       pavucontrol \
       perl-term-readkey \
+      pkgfile \
       powertop \
       procps-ng \
       psmisc \
+      qt5-styleplugins \
       ranger \
       ruby \
       s-nail \
@@ -117,6 +120,7 @@ case "$dist" in
       wget \
       x11-ssh-askpass \
       x11vnc \
+      xclip \
       xdg-user-dirs \
       xdg-utils \
       xdotool \

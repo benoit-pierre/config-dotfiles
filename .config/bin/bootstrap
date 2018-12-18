@@ -139,7 +139,7 @@ case "$dist" in
     then
       run sudo pacman --sync --needed $packages
     fi
-    if which yaourt &>/dev/null
+    if which yay &>/dev/null
     then
       for pkg in \
         cgdb \
@@ -148,7 +148,7 @@ case "$dist" in
         ssvnc \
         ;
       do
-        pacman --query "$pkg" &>/dev/null || run yaourt "$pkg"
+        pacman --query "$pkg" &>/dev/null || run yay "$pkg"
       done
     fi
     ;;

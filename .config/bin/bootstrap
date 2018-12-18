@@ -98,7 +98,6 @@ case "$dist" in
       patchutils \
       pavucontrol \
       perl-term-readkey \
-      pkgfile \
       powertop \
       procps-ng \
       psmisc \
